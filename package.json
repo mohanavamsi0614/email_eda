@@ -1,0 +1,24 @@
+{
+  "name": "email_eda",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch service.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.975.0",
+    "bull": "^4.16.5",
+    "bullmq": "^5.67.1",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "ioredis": "^5.9.2",
+    "nodemailer": "^7.0.13",
+    "sendgrid": "^5.2.3"
+  }
+}
