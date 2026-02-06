@@ -1,0 +1,17 @@
+=== Starting Email Failover Verification ===
+
+--- Test 1: Failover from SES to SendGrid ---
+[MockProvider] SES is simulating a FAILURE (Network Error)
+[Stats] Recorded FAILURE for ses
+[MockProvider] SendGrid is simulating SUCCESS for test@example.com
+[Stats] Recorded SUCCESS for sendgrid
+
+>>> RESULT: PASSED - Email dispatched successfully after failover.
+
+--- Test 2: All Providers Fail (Expected Error) ---
+[Stats] Recorded FAILURE for ses
+[Stats] Recorded FAILURE for sendgrid
+
+>>> RESULT: PASSED - Correctly threw error when all providers failed.
+
+=== Verification Complete ===

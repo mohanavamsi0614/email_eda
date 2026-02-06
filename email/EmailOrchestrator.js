@@ -41,7 +41,6 @@ class EmailOrchestrator {
                     const opts = rule.priority ? { priority: rule.priority } : {};
 
                     await this.queue.add("sendEmail", {
-                        providerName: "ses",
                         to: toEmail,
                         subject: emailContent.subject,
                         html: emailContent.body,

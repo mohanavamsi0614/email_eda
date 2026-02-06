@@ -29,7 +29,7 @@ class EmailDispatcher {
     constructor() {
         this.manager = new ProviderManager();
         this.defaultProviders = ['ses', 'sendgrid', 'smtp'];
-        this.timeoutMs = 5000; // 5 seconds timeout per provider
+        this.timeoutMs = 20000; // 20 seconds timeout per provider
     }
 
     /**
