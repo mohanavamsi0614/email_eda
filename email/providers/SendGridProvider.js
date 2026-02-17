@@ -1,27 +1,39 @@
-import sendgrid from 'sendgrid';
+import sgMail from "@sendgrid/mail";
+import dotenv from "dotenv";
+dotenv.config();
+console.log(process.env.SENDGRID_API_KEY);
 
 class SendGridProvider {
   constructor() {
-    this.sg = sendgrid(process.env.SENDGRID_API_KEY);
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   }
 
   async sendEmail(to, subject, html) {
-    const request = this.sg.emptyRequest({
-      method: 'POST',
-      path: '/v3/mail/send',
-      body: {
-        personalizations: [{
-          to: [{ email: to }],
-          subject: subject,
-        }],
-        from: { email: process.env.EMAIL_FROM },
-        content: [{
-          type: 'text/html',
-          value: html,
-        }],
-      },
-    });
-    return this.sg.API(request);
+    try {
+      const msg = {
+        to: to,
+        from: process.env.EMAIL_FROM,
+        subject: subject,
+        html: html,
+      };
+
+      const response = await sgMail.send(msg);
+
+      return {
+        success: true,
+        response: response[0].statusCode,
+      };
+    } catch (error) {
+      console.error(
+        "SendGrid Error:",
+        error.response?.body || error.message
+      );
+
+      return {
+        success: false,
+        error: error.response?.body || error.message,
+      };
+    }
   }
 }
 

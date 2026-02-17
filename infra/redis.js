@@ -15,11 +15,10 @@ class RedisService {
             port: this.port,
             password: this.password,
             maxRetriesPerRequest: null,
-            retryStrategy: (times) => {
-                const delay = Math.min(times * 50, 2000);
-                return delay;
-            }
-        };
+            reconnectStrategy: (retries) => {
+                console.log(`🔁 Redis reconnect attempt #${retries}`);
+                return Math.min(retries * 100, 3000); // retry delay
+            },        };
 
         if (this.tls) {
             config.tls = this.tls;

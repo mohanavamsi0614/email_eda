@@ -34,7 +34,6 @@ export const studentTemplates = {
       <h2>Email Verification</h2>
       <p>Please click the link below to verify your email address.</p>
       <p><a href="${data.verificationUrl}">Verify Email</a></p>
-      <p>Or use this code: <strong>${data.otp}</strong></p>
     `
   }),
 

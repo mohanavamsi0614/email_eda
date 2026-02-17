@@ -29,7 +29,7 @@ class EmailDispatcher {
     constructor() {
         this.manager = new ProviderManager();
         this.defaultProviders = ['ses', 'sendgrid', 'smtp'];
-        this.timeoutMs = 20000; // 20 seconds timeout per provider
+        this.timeoutMs = 20000;
     }
 
     /**
@@ -59,11 +59,10 @@ class EmailDispatcher {
                 
                 console.log(`[EmailDispatcher] Successfully sent email via ${name}`);
                 this.manager.recordSuccess(name);
-                return; // Success, stop trying
+                return;
             } catch (error) {
                 console.warn(`[EmailDispatcher] Failed to send via ${name}: ${error.message}`);
                 this.manager.recordFailure(name);
-                // Classify error (mock classification)
                 const isRetryable = error.message.includes("timeout") || error.message.includes("network");
                 errors.push({ provider: name, error: error.message, isRetryable });
             }
