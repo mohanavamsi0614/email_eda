@@ -13,7 +13,7 @@ class SESProvider {
 
   async sendEmail(to, subject, html) {
     const command = new SendEmailCommand({
-      Source: process.env.EMAIL_FROM,
+      Source: process.env.SES_FROM_EMAIL,
       Destination: { ToAddresses: [to] },
       Message: {
         Subject: { Data: subject },
